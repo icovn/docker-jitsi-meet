@@ -44,13 +44,14 @@ services:
 
     # XMPP server
     prosody:
-        image: jitsi/prosody
+        image: topkiddocker.topica.vn/prosody:1.0.2
         expose:
             - '5222'
             - '5347'
             - '5280'
         volumes:
             - ${CONFIG}/prosody:/config
+            - ${CUSTOM_PLUGIN}:/prosody-plugins-custom
         environment:
             - AUTH_TYPE
             - ENABLE_AUTH
