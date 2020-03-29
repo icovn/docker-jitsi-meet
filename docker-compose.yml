@@ -44,7 +44,7 @@ services:
 
     # XMPP server
     prosody:
-        image: topkiddocker.topica.vn/prosody:1.0.4
+        image: topkiddocker.topica.vn/prosody:1.0.5
         expose:
             - '5222'
             - '5347'
@@ -91,6 +91,12 @@ services:
             - JIBRI_XMPP_PASSWORD
             - JIBRI_RECORDER_USER
             - JIBRI_RECORDER_PASSWORD
+            - JWT_APP_ID
+            - JWT_APP_SECRET
+            - JWT_ACCEPTED_ISSUERS
+            - JWT_ACCEPTED_AUDIENCES
+            - JWT_ASAP_KEYSERVER
+            - JWT_ALLOW_EMPTY
             - JWT_AUTH_TYPE
             - JWT_TOKEN_AUTH_MODULE
             - JWT_VERIFY_URL
