@@ -21,14 +21,9 @@ VirtualHost "{{ .Env.XMPP_DOMAIN }}"
 {{ if $ENABLE_AUTH }}
   {{ if eq $AUTH_TYPE "jwt" }}
     authentication = "{{ $JWT_AUTH_TYPE }}"
-    app_id = "{{ .Env.JWT_APP_ID }}"
-    app_secret = "{{ .Env.JWT_APP_SECRET }}"
-    allow_empty_token = {{ if $JWT_ALLOW_EMPTY }}true{{ else }}false{{ end }}
-    {{ if $JWT_ASAP_KEYSERVER }}
-    asap_key_server = "{{ .Env.JWT_ASAP_KEYSERVER }}"
-    {{ end }}
+    verify_url = "{{ .Env.JWT_VERIFY_URL }}"
 
-    {{ else if eq $AUTH_TYPE "ldap" }}
+  {{ else if eq $AUTH_TYPE "ldap" }}
     authentication = "cyrus"
     cyrus_application_name = "xmpp"
     allow_unencrypted_plain_auth = true
