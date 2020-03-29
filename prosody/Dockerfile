@@ -22,10 +22,15 @@ RUN \
       git \
       gcc \
       patch \
+      m4 \
+      make \
+      vim \
     && luarocks install cyrussasl 1.1.0-1 \
     && luarocks install lua-cjson 2.1.0-1 \
     && luarocks install luajwtjitsi 1.3-7 \
     && luarocks install net-url 0.9-1 \
+    && luarocks install http \
+    && luarocks install redis-lua \
     && apt-dpkg-wrap apt-get remove -t stretch-backports -y \
       git \
       gcc \
