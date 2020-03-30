@@ -44,7 +44,7 @@ services:
 
     # XMPP server
     prosody:
-        image: topkiddocker.topica.vn/prosody:1.0.5
+        image: topkiddocker.topica.vn/prosody:1.0.6
         expose:
             - '5222'
             - '5347'

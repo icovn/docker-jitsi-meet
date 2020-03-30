@@ -27,7 +27,6 @@ VirtualHost "{{ .Env.XMPP_DOMAIN }}"
     {{ if $JWT_ASAP_KEYSERVER }}
     asap_key_server = "{{ .Env.JWT_ASAP_KEYSERVER }}"
     {{ end }}
-    verify_url = "{{ .Env.JWT_VERIFY_URL }}"
 
   {{ else if eq $AUTH_TYPE "ldap" }}
     authentication = "cyrus"
@@ -98,6 +97,7 @@ Component "{{ .Env.XMPP_MUC_DOMAIN }}" "muc"
         "{{ $JWT_TOKEN_AUTH_MODULE }}";
         {{ end }}
     }
+    verify_url = "{{ .Env.JWT_VERIFY_URL }}"
 
 Component "focus.{{ .Env.XMPP_DOMAIN }}"
     component_secret = "{{ .Env.JICOFO_COMPONENT_SECRET }}"
