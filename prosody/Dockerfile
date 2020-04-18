@@ -8,8 +8,8 @@ RUN \
     && rm -f /tmp/prosody.key \
     && echo "deb http://packages.prosody.im/debian stretch main" > /etc/apt/sources.list.d/prosody.list \
     && apt-dpkg-wrap apt-get update \
+    && apt-dpkg-wrap apt-get install -y prosody \
     && apt-dpkg-wrap apt-get install -t stretch-backports -y \
-      prosody \
       liblua5.2-dev \
       sasl2-bin \
       libsasl2-modules-ldap \
@@ -49,9 +49,7 @@ RUN \
     && apt-cleanup \
     && rm -rf /tmp/pkg /var/cache/apt
 
-RUN \
-    sed -i s/hook/hook_global/g /prosody-plugins/mod_auth_token.lua \
-    && patch -d /usr/lib/prosody/modules/muc -p0 < /prosody-plugins/muc_owner_allow_kick.patch
+RUN patch -d /usr/lib/prosody/modules/muc -p0 < /prosody-plugins/muc_owner_allow_kick.patch
 
 COPY rootfs/ /
 

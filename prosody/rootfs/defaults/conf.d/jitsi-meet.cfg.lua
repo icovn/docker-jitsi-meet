@@ -33,7 +33,7 @@ VirtualHost "{{ .Env.XMPP_DOMAIN }}"
     cyrus_application_name = "xmpp"
     allow_unencrypted_plain_auth = true
   {{ else if eq $AUTH_TYPE "internal" }}
-    authentication = "internal_plain"
+    authentication = "internal_hashed"
   {{ end }}
 {{ else }}
     authentication = "anonymous"
@@ -67,14 +67,14 @@ VirtualHost "{{ .Env.XMPP_AUTH_DOMAIN }}"
         key = "/config/certs/{{ .Env.XMPP_AUTH_DOMAIN }}.key";
         certificate = "/config/certs/{{ .Env.XMPP_AUTH_DOMAIN }}.crt";
     }
-    authentication = "internal_plain"
+    authentication = "internal_hashed"
 
 {{ if .Env.XMPP_RECORDER_DOMAIN }}
 VirtualHost "{{ .Env.XMPP_RECORDER_DOMAIN }}"
     modules_enabled = {
       "ping";
     }
-    authentication = "internal_plain"
+    authentication = "internal_hashed"
 {{ end }}
 
 Component "{{ .Env.XMPP_INTERNAL_MUC_DOMAIN }}" "muc"
@@ -97,6 +97,8 @@ Component "{{ .Env.XMPP_MUC_DOMAIN }}" "muc"
         "{{ $JWT_TOKEN_AUTH_MODULE }}";
         {{ end }}
     }
+    muc_room_locking = false
+    muc_room_default_public_jids = true
     verify_url = "{{ .Env.JWT_VERIFY_URL }}"
 
 Component "focus.{{ .Env.XMPP_DOMAIN }}"
