@@ -45,7 +45,7 @@ services:
 
     # XMPP server
     prosody:
-        image: topkiddocker.topica.vn/prosody:1.0.6
+        image: icovn/prosody:latest
         restart: ${RESTART_POLICY}
         expose:
             - '5222'
